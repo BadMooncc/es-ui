@@ -1,5 +1,6 @@
 <template>
   <div class="docs-demo-wrapper">
+    <slot name="source"></slot>
       <div :style="{height: isExpand ? 'auto' : '0'}" class="demo-container">
         <div span="14">
           <div class="docs-demo docs-demo--expand">

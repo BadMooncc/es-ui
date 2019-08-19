@@ -4,10 +4,8 @@
 
 ```html
 
-<div>
-  <button>dasdas</button>
-  <hello-world></hello-world>
-</div>
+  <h1>ABC</h1>
+  
 ```
 :::
 
