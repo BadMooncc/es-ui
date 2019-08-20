@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <button 
     class="d-button"
     :class="[
               type ? 'd-button-' + type : '',
@@ -13,7 +13,8 @@
               }
             ]"
   >
-  </div>
+    <slot></slot>
+  </button>
 </template>
 <script>
   export default{

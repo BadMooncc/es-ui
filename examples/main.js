@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import DDui from '../packages'
+import DDui from '../packages/index'
 import demoBlock from './components/DemoBlock.vue'
 import helloWorld from './components/HelloWorld.vue'
 
