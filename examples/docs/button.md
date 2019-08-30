@@ -3,8 +3,9 @@
 :::demo
 
 ```html
-
-  <dd-button>ABC</dd-button>
+  <dd-button size="mini">ABC</dd-button>
+  <dd-button size="small">ABC</dd-button>
+  <dd-button size="middle">ABC</dd-button>
   
 ```
 :::

@@ -33,9 +33,8 @@ export default {
     width: 210px;
   }
   .view {
-    float: left;
-    width: calc('~100% - 215px');
-    padding: 32px 48px 48px;
+    width: 100%;
+    padding: 32px 48px 48px 235px;
     box-sizing: border-box;
   }
 }

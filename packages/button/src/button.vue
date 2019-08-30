@@ -1,9 +1,10 @@
 <template>
-  <button 
-    class="d-button"
+<div>
+  <button
+    class="d__button"
     :class="[
-              type ? 'd-button-' + type : '',
-              buttonSize ? 'el-button--' + buttonSize : '',
+              type ? 'd__button--' + type : '',
+              buttonSize ? 'd__button--' + buttonSize : '',
               {
                 'is-disabled': buttonDisabled,
                 'is-loading': loading,
@@ -15,6 +16,9 @@
   >
     <slot></slot>
   </button>
+</div>
+
+  
 </template>
 <script>
   export default{
@@ -51,3 +55,6 @@
     }
   }
 </script>
+<style lang="sass">
+
+</style>

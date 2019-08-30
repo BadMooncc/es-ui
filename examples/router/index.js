@@ -9,12 +9,15 @@ export default new Router({
     {
       path: '/',
       name: 'HelloWorld',
-      component: HelloWorld
+      components: {
+        default: HelloWorld,
+        // view: r => require.ensure([], () => r(require('../docs/test.md')))
+      }
     },
     {
-      path: '/test',
-      name: 'test',
-      component: r => require.ensure([], () => r(require('../docs/test.md')))
+      path: '/button',
+      name: 'button',
+      component: r => require.ensure([], () => r(require('../docs/button.md')))
     }
   ]
 })

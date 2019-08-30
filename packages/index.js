@@ -1,4 +1,5 @@
 import Button from './button'
+import './theme-default/index.scss'
 
 const components = [
   Button
