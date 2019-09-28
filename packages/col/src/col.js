@@ -1,11 +1,10 @@
 export default {
-  name: 'DdCol',
+  name: 'ElCol',
   props: {
     span: {
       type: Number,
       default: 24
     },
-    offset: Number,
     tag: {
       type: String,
       default: 'div'
@@ -16,49 +15,56 @@ export default {
     xs: [Number, Object],
     sm: [Number, Object],
     md: [Number, Object],
-    lg: [Number, Object]
+    lg: [Number, Object],
+    xl: [Number, Object]
   },
+
   computed: {
-    gutter () {
-      let parent = this.$parent
-      while (parent && parent.$options.componentName !== 'WRow') {
-        parent = parent.$parent
+    gutter() {
+      let parent = this.$parent;
+      while (parent && parent.$options.componentName !== 'ElRow') {
+        parent = parent.$parent;
       }
-      return parent ? parent.gutter : 0
+      return parent ? parent.gutter : 0;
     }
   },
-  render(h){
-    let classList = []
-    let style = {}
+  render(h) {
+    let classList = [];
+    let style = {};
 
     if (this.gutter) {
-      style.paddingLeft = this.gutter / 2 + 'px'
-      style.paddingRight = style.paddingLeft
+      style.paddingLeft = this.gutter / 2 + 'px';
+      style.paddingRight = style.paddingLeft;
     }
 
     ['span', 'offset', 'pull', 'push'].forEach(prop => {
-      if (this[prop]) {
+      if (this[prop] || this[prop] === 0) {
         classList.push(
           prop !== 'span'
-            ? `w-col-${prop}-${this[prop]}`
-            : `w-col-${this[prop]}`
-        )
+            ? `el-col-${prop}-${this[prop]}`
+            : `el-col-${this[prop]}`
+        );
       }
     });
 
-    ['xs', 'sm', 'md', 'lg'].forEach(size => {
+    ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
       if (typeof this[size] === 'number') {
-        classList.push(`w-col-${size}-${this[size]}`)
+        classList.push(`el-col-${size}-${this[size]}`);
       } else if (typeof this[size] === 'object') {
-        let props = this[size]
+        let props = this[size];
         Object.keys(props).forEach(prop => {
           classList.push(
             prop !== 'span'
-              ? `w-col-${size}-${prop}-${props[prop]}`
-              : `w-col-${size}-${props[prop]}`
-          )
-        })
+              ? `el-col-${size}-${prop}-${props[prop]}`
+              : `el-col-${size}-${props[prop]}`
+          );
+        });
       }
-    })
+    });
+
+    return h(this.tag, {
+      class: ['el-col', classList],
+      style
+    }, this.$slots.default);
   }
-}
+};
