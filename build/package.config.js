@@ -3,11 +3,11 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'ddui': './src/packages/index.js'
+    'ddui': './packages/index.js'
   },
   output: {
     path: path.resolve(__dirname, '../package'),
-    publicPath: '/package/',
+    publicPath: '/',
     library: 'ddui',
     libraryTarget: 'umd',
     umdNamedDefine: true

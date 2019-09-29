@@ -1,9 +1,9 @@
 {
-  "name": "du-ui",
-  "version": "1.0.0",
+  "name": "dudu-ui",
+  "version": "1.0.4",
   "description": "A Vue.js project",
   "author": "zhaodh09 <zhaodh09@guahao.com>",
-  "main": "packages/index.js",
+  "main": "package/src/index.js",
   "private": false,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -14,7 +14,7 @@
     "publish": "node build/publish.js",
     "package:dev": "webpack --config build/package.dev.config.js",
     "package:prod": "webpack --config build/package.prod.config.js",
-    "package": "npm run package:prod && npm publish && npm run build"
+    "package": "npm run package:prod && npm publish"
   },
   "dependencies": {
     "less": "^3.9.0",
@@ -81,5 +81,18 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BadMooncc/DD-ui.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BadMooncc/DD-ui/issues"
+  },
+  "homepage": "https://github.com/BadMooncc/DD-ui#readme"
 }

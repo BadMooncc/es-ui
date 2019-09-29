@@ -3,9 +3,10 @@ const merge = require('webpack-merge')
 const config = require('../config')
 const baseWebpackConfig = require('./package.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const extractScss = new ExtractTextPlugin('/ydui.min.css')
+const extractScss = new ExtractTextPlugin('/dd-ui.min.css')
+const path = require('path')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
   output: {
@@ -48,7 +49,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new CopyWebpackPlugin([
       // {output}/file.txt
-      { from: `./src/packages`,to:`./packages`}
+      { from: `./packages`, to:`./src`}
     ]),
   ]
 })
