@@ -1,10 +1,11 @@
 <template>
-<div>
+
   <button
-    class="d__button"
+    class="do__button"
+    :disabled="disabled"
     :class="[
-              type ? 'd__button--' + type : '',
-              buttonSize ? 'd__button--' + buttonSize : '',
+              type ? 'do__button--' + type : '',
+              buttonSize ? 'do__button--' + buttonSize : '',
               {
                 'is-disabled': buttonDisabled,
                 'is-loading': loading,
@@ -14,15 +15,17 @@
               }
             ]"
   >
+    <i class="el-icon-loading" v-if="loading"></i>
+    <i :class="icon" v-if="icon && !loading"></i>
     <slot></slot>
   </button>
-</div>
+
 
   
 </template>
 <script>
   export default{
-    name: 'DdButton',
+    name: 'DoButton',
     props: {
       type: {
         type: String,
@@ -31,6 +34,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      icon: {
+        type: String,
+        default: ''
       },
       size: String,
       loading: Boolean,

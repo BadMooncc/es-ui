@@ -23,6 +23,9 @@
       return {
         data: navConf
       }
+    },
+    mounted() {
+      console.log(123)
     }
   }
 </script>
@@ -34,8 +37,8 @@
     bottom: 0;
     overflow: scroll;
     width: 215px;
-    margin: 130px 0 32px;
-    padding: 0;
+    margin: 80px 0 32px;
+    padding: 20px 0;
     color: #3F536E;
     background-color: #fff;
     z-index: 99;

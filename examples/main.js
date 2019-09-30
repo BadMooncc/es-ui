@@ -7,6 +7,7 @@ import DDui from '../packages/index'
 import demoBlock from './components/DemoBlock.vue'
 import helloWorld from './components/HelloWorld.vue'
 
+import 'highlight.js/styles/googlecode.css'
 Vue.config.productionTip = false
 Vue.component('demo-block', demoBlock)
 Vue.component('hello-world', helloWorld)

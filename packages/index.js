@@ -1,8 +1,12 @@
 import Button from './button'
+import Row from './row'
+import Col from './col'
 import './theme-default/index.scss'
 
 const components = [
-  Button
+  Button,
+  Row,
+  Col
 ]
 
 const install = (_vue) => {
@@ -13,7 +17,7 @@ const install = (_vue) => {
 }
 
 export default{
-  version: '1.0.0',
+  version: '1.0.3',
   install,
   Button
 }
