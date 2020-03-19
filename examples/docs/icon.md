@@ -93,7 +93,7 @@
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
     <span>
-      <i :class="'do-' + name"></i>
+      <i :class="'do-icon-' + name"></i>
       {{'do-' + name}}
     </span>
   </li>
