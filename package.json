@@ -10,17 +10,25 @@
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
-    "build": "node build/build.js",
+    "build": "node build/build.js && npm run service",
     "publish": "node build/publish.js",
     "package:dev": "webpack --config build/package.dev.config.js",
     "package:prod": "webpack --config build/package.prod.config.js",
-    "package": "npm run package:prod && npm publish"
+    "package": "npm run package:prod && npm publish",
+    "service": "node ./service/bin/www"
   },
   "dependencies": {
+    "element-ui": "^2.13.2",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

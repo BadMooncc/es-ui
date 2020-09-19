@@ -6,11 +6,14 @@ import router from './router'
 import DDui from '../packages/index'
 import demoBlock from './components/DemoBlock.vue'
 import helloWorld from './components/HelloWorld.vue'
-
+import elementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import 'highlight.js/styles/googlecode.css'
+
 Vue.config.productionTip = false
 Vue.component('demo-block', demoBlock)
 Vue.component('hello-world', helloWorld)
+Vue.use(elementUI);
 Vue.use(DDui)
 /* eslint-disable no-new */
 new Vue({

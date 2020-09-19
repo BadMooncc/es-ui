@@ -54,13 +54,13 @@
       ]
     },
     {
-      "desc": "视图组件",
+      "desc": "基于el组件",
       "path": "/component",
       "items": [
         {
-          "desc": "Showmore 显示更多",
-          "name": "show-more",
-          "path": "/showMore"
+          "desc": "公共table组件",
+          "name": "common-table",
+          "path": "/commonTable"
         },
         {
           "desc": "Limit 限制输入域",
