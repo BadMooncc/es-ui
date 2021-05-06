@@ -1,6 +1,6 @@
-# dd-ui
+# es-ui
 
-> A Vue.js project
+> 二次封装element-ui组件库
 
 ## Build Setup
 
