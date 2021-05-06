@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import navConf from './nav.conf.json'
+  import navConf from '../nav.config'
   export default {
     data () {
       return {
@@ -25,7 +25,7 @@
       }
     },
     mounted() {
-      console.log(123)
+      // console.log(123)
     }
   }
 </script>
@@ -33,12 +33,13 @@
   .side-nav{
     position: fixed;
     height: 100%;
+    border-right: 1px solid #f0f0f0;
     top: 0;
     bottom: 0;
     overflow: scroll;
     width: 215px;
     margin: 80px 0 32px;
-    padding: 20px 0;
+    padding: 50px 0 0 0;
     color: #3F536E;
     background-color: #fff;
     z-index: 99;
@@ -48,7 +49,7 @@
     .side-nav-title{
       padding: 0 24px 8px;
       color: #8DABC4;
-      font-size: 12px;
+      // font-size: 12px;
       font-weight: bold;
       letter-spacing: 1px;
       text-transform: uppercase;

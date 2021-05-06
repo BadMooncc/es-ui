@@ -1,14 +1,10 @@
-import Button from './button'
-import Row from './row'
-import Col from './col'
-import CommonTable from './commonTable'
-import './theme-default/index.scss'
+
+import CommonTable from './commonTable';
+import MkUpload from './upload';
 
 const components = [
-  Button,
-  Row,
-  Col,
-  CommonTable
+  CommonTable,
+  MkUpload
 ]
 
 const install = (_vue) => {

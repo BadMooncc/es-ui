@@ -22,11 +22,11 @@
   }
 </style>
 <template>
-  <header class="header" :style="$route.name === 'index' ? 'box-shadow:none' : 'box-shadow:0 10px 60px 0 rgba(29,29,31,0.07)'">
+  <header class="header" :style="$route.name === 'index' ? 'box-shadow:none' : 'box-shadow:0 2px 3px 0 rgba(29,29,31,0.07)'">
     <div class="header-container">
-      <router-link :to="{name: 'index'}"><img src="" width="100"></router-link>
+      <router-link :to="{name: 'index'}"><img src="/static/images/logo.png" width="100"></router-link>
       <!-- <router-link :to="{name: 'giud'}">组件</router-link> -->
-      <button @click="handle">组件</button>
+      <!-- <button @click="handle">组件</button> -->
     </div>
   </header>
 </template>

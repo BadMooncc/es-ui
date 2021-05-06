@@ -1,43 +1,47 @@
 <template>
   <div>
     <el-table
-      :stripe="options.stripe"
-      :border="options.border"
-      :fit="options.fit"
-      :size="options.size"
-      :highlight-current-row="options.highlightCurrentRow"
+      ref="elTable"
+      :stripe="stripe"
+      :border="border"
+      :header-cell-style="headerCellStyle"
+      :fit="fit"
+      :size="size"
+      :highlight-current-row="highlightCurrentRow"
       :data="list"
-      :lazy="options.lazy"
+      :lazy="lazy"
       :load="loadGetData"
       @row-click="clickRow"
       @row-dblclick="dblclickRow"
       @row-contextmenu="contextmenu"
       @header-click="headClick"
-      @header-contextmenu="headcontextmenu"
+      @header-contextmenu="headContextmenu"
       @current-change="rowChange"
+      @select="handleSelect"
+      @select-all="handleSelectAll"
       @selection-change="handleSelectionChange"
-      @sort-change="tableSort"
-      @cell-dblclick="headCellDblclick"
+      @sort-change="sortChange"
+      @cell-click="cellClick"
+      @cell-dblclick="cellDblclick"
     >
       <!-- 表格展开行 -->
-      <el-table-column v-if="options.type === 'expand'" type="expand">
+      <el-table-column v-if="type === 'expand'" type="expand">
         <template slot-scope="scope">
-          <expand-dom :index-row="scope.$index" :row="scope.row" :render="options.render"></expand-dom>
+          <expand-dom :index-row="scope.$index" :row="scope.row" :render="render"></expand-dom>
         </template>
       </el-table-column>
       <!-- 表格开启多选 -->
       <el-table-column
-        v-else-if="options.type === 'selection'"
+        v-else-if="type === 'selection'"
         type="selection"
         style="width: 55px;"
       ></el-table-column>
       <template v-for="(column, index) in columns">
-        <!-- <slot v-if="column.slot" :name="column.slot"></slot> -->
         <el-table-column
           :key="index"
           :prop="column.prop"
-          :show-overflow-tooltip="column.tooltip && column.tooltip === 'close' ? false : true"
-          :align="options.align || 'center'"
+          :show-overflow-tooltip="column.tooltip? true : false"
+          :align="align"
           :header-align="'center'"
           :width="column.width"
           :min-width="column.minWidth"
@@ -45,6 +49,12 @@
           :label="column.label"
           :sortable="column.sortable"
           v-if="column.render">
+          <template v-if="column.renderHeader" slot="header">
+            <expand-dom
+              :column="column"
+              :render="column.renderHeader"
+            />
+          </template>
           <template slot-scope="scope">
             <!-- 有render渲染render -->
             <expand-dom
@@ -61,7 +71,7 @@
           :key="index"
           :prop="column.prop"
           :show-overflow-tooltip="true"
-          :align="options.align || 'center'"
+          :align="align"
           :header-align="'center'"
           :width="column.width"
           :min-width="column.minWidth"
@@ -69,6 +79,12 @@
           :label="column.label"
           :sortable="column.sortable"
         >
+          <template v-if="column.renderHeader" slot="header">
+            <expand-dom
+              :column="column"
+              :render="column.renderHeader"
+            />
+          </template>
         </el-table-column>
         <!-- <span v-else>
               {{
@@ -95,7 +111,7 @@
 </template>
 <script>
 export default {
-  name: 'commonTable',
+  name: 'EsTable',
   components: {
     expandDom: {
       functional: true, // 函数式组件
@@ -114,31 +130,22 @@ export default {
         const { row, index, indexRow: $index, column = {} } = ctx.props
         const params = { row, index, $index, column }
         return ctx.props.render(h, params)
+      },
+      renderHeader: (h, ctx) => {
+        return ctx.props.render(h, params)
       }
     }
-    // type=expand时渲染column点击展开
-    // expandDom: {
-    //   functional: true, // 函数式组件
-    //   props: {
-    //     row: Object,
-    //     indexRow: Number,
-    //     render: Function
-    //   },
-    //   render: (h, ctx) => {
-    //     const { row, indexRow } = ctx.props
-    //     const params = {
-    //       row,
-    //       indexRow
-    //     }
-    //     console.log(params, 'row')
-    //     return ctx.props.render(h, params)
-    //   }
-    // }
   },
   data () {
-    return {}
+    return {
+      tableRef: ''
+    }
   },
   props: {
+    // table option
+    headerCellStyle: {
+      type: Object | String | Function
+    },
     showPagination: {
       type: Boolean,
       default: true
@@ -170,28 +177,47 @@ export default {
         pageSizes: [10, 20, 50] // page-sizes
       })
     },
-    // opt
-    options: {
-      type: Object,
-      default () {
-        return {
-          fit: true, // 列宽是否自动撑开
-          size: 'medium',
-          border: false, // 是否需要边框
-          highlightCurrentRow: false, // 是否高亮当前行
-          align: 'center',
-          type: '',
-          render () {
-          }
-          // showSummary: false
-        }
-      }
+    fit: {// 列宽是否自动撑开
+      type: Boolean,
+      default: true
+    },
+    stripe: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: 'medium'
+    },
+    border: {
+      type: Boolean,
+      default: false
+    },
+    lazy: {
+      type: Boolean,
+      default: false
+    },
+    loadGetData: {
+      type: Function,
+      default: () => {}
+    },
+    highlightCurrentRow: {
+      type: Boolean,
+      default: false
+    },
+    align: {
+      type: String,
+      default: 'center'
+    },
+    type: {
+      type: String,
+      default: ''
     }
   },
+  mounted() {
+    this.tableRef = this.$refs.elTable;
+  },
   methods: {
-    loadGetData (row, treeNode, resolve) {
-      // 懒加载事件数据
-    },
     handleSizeChange (size) {
       this.$emit('changePageSize', size)
     },
@@ -231,15 +257,15 @@ export default {
         column: column,
         event: event
       }
-      this.$emit('headClick', data)
+      this.$emit('headerClick', data)
     },
-    headcontextmenu (column, event) {
+    headContextmenu (column, event) {
       // 头部列右键点击事件
       let data = {
         column: column,
         event: event
       }
-      this.$emit('headcontextmenu', data)
+      this.$emit('headerContextmenu', data)
     },
     rowChange (currentRow, oldCurrentRow) {
       // 当前行发生改变时的事件
@@ -251,21 +277,34 @@ export default {
     },
     handleSelectionChange (val) {
       // 多行选中
-      console.log(val)
-      this.$emit('handleSelectionChange', val)
+      this.$emit('selectionChange', val)
+    },
+    handleSelect() {
+      this.$emit('select', val)
+    },
+    handleSelectAll() {
+      this.$emit('selectAll', val)
     },
     // 表格排序
-    tableSort (column) {
-      this.$emit('tableSort', column)
+    sortChange (column) {
+      this.$emit('sortChange', column)
     },
     // 双击单元格
-    headCellDblclick (row, column, cell) {
+    cellDblclick (row, column, cell) {
       let data = {
         row,
         column,
         cell
       }
-      this.$emit('headCellDblclick', data)
+      this.$emit('cellDblclick', data)
+    },
+    cellClick(row, column, cell) {
+      let data = {
+        row,
+        column,
+        cell
+      }
+      this.$emit('cellClick', data)
     }
   }
 }

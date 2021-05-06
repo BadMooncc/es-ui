@@ -3,8 +3,8 @@ const merge = require('webpack-merge')
 const config = require('../config')
 const baseWebpackConfig = require('./package.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const extractScss = new ExtractTextPlugin('/dd-ui.min.css')
-const path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const extractScss = new ExtractTextPlugin('/markting-ui.min.css')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
@@ -25,7 +25,7 @@ module.exports = merge(baseWebpackConfig, {
       }
     }),
     //new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       uglifyOptions: {
         ie8: false,
         output: {
@@ -37,6 +37,7 @@ module.exports = merge(baseWebpackConfig, {
         },
         compress: {
           warnings: false,
+          drop_debugger: true,
           drop_console: true
         }
       }

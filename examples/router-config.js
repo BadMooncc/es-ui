@@ -1,12 +1,14 @@
 export default [
-  // {
-  //   path: '/',
-  //   name: 'HelloWorld',
-  //   components: {
-  //     default: HelloWorld,
-  //     // view: r => require.ensure([], () => r(require('../docs/test.md')))
-  //   }
-  // },
+  {
+    path: '/',
+    name: 'installed',
+    component: r => require.ensure([], () => r(require('./docs/installed.md')))
+  },
+  {
+    path: '/start',
+    name: 'start',
+    component: r => require.ensure([], () => r(require('./docs/start.md')))
+  },
   {
     path: '/button',
     name: 'button',
@@ -21,5 +23,10 @@ export default [
     path: '/commonTable',
     name: 'common-table',
     component: r => require.ensure([], () => r(require('./docs/commonTable.md')))
+  },
+  {
+    path: '/upload',
+    name: 'mk-upload',
+    component: r => require.ensure([], () => r(require('./docs/upload.md')))
   }
 ]

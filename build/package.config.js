@@ -3,12 +3,12 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'ddui': './packages/index.js'
+    'marketing-ui': './packages/index.js'
   },
   output: {
     path: path.resolve(__dirname, '../package'),
     publicPath: '/',
-    library: 'ddui',
+    library: 'marketing-ui',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
