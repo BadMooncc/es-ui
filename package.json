@@ -52,7 +52,7 @@
     "jest-serializer-vue": "^0.3.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
-    "markdown-it": "^9.1.0",
+    "markdown-it": "^12.3.2",
     "markdown-it-chain": "^1.3.0",
     "markdown-it-container": "^2.0.0",
     "morgan": "~1.9.1",
